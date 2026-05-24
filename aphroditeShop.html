@@ -204,6 +204,43 @@
       gap: 8px;
     }
 
+    .cart-icon-btn {
+      width: 46px;
+      min-width: 46px;
+      padding: 0;
+      justify-content: center;
+    }
+
+    .cart-icon {
+      width: 22px;
+      height: 22px;
+      display: block;
+    }
+
+    .cart-icon-btn .count {
+      position: absolute;
+      top: -7px;
+      right: -7px;
+      box-shadow: 0 0 0 2px var(--paper);
+    }
+
+    body[dir="rtl"] .cart-icon-btn .count {
+      right: auto;
+      left: -7px;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
     .count {
       min-width: 22px;
       height: 22px;
@@ -886,6 +923,7 @@
       display: grid;
       gap: 12px;
       border-top: 1px solid var(--line);
+      background: var(--panel);
     }
 
     .toast {
@@ -998,6 +1036,48 @@
       .product-actions {
         grid-template-columns: 1fr;
       }
+
+      .drawer {
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: 100vw;
+        height: 100dvh;
+        max-height: 100dvh;
+        border-radius: 0;
+        border-left: 0;
+        border-right: 0;
+      }
+
+      body[dir="rtl"] .drawer {
+        left: 0;
+        right: auto;
+      }
+
+      .drawer-head {
+        min-height: 58px;
+        padding: 0 14px;
+      }
+
+      .drawer-items {
+        padding: 12px;
+        padding-bottom: 18px;
+      }
+
+      .drawer-foot {
+        position: sticky;
+        bottom: 0;
+        padding: 14px;
+      }
+
+      .mini-cart-item {
+        grid-template-columns: 82px 1fr;
+      }
+
+      .mini-cart-item img {
+        width: 82px;
+        height: 96px;
+      }
     }
   </style>
 </head>
@@ -1026,8 +1106,13 @@
           <option value="ar">AR</option>
         </select>
 
-        <button class="icon-btn" id="cartButton" type="button">
-          <span data-i18n="cart">Panier</span>
+        <button class="icon-btn cart-icon-btn" id="cartButton" type="button" aria-label="Panier" title="Panier">
+          <span class="sr-only" data-i18n="cart">Panier</span>
+          <svg class="cart-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="8" cy="21" r="1"></circle>
+            <circle cx="19" cy="21" r="1"></circle>
+            <path d="M2.05 2.05h2l2.7 12.6a2 2 0 0 0 2 1.6h8.9a2 2 0 0 0 2-1.6l1.6-8.4H5.12"></path>
+          </svg>
           <span class="count" id="cartCount">0</span>
         </button>
       </div>
@@ -1852,6 +1937,9 @@
       renderCart();
       const product = getProduct(id);
       showToast(t("added", { name: product ? localize(product).name : "" }));
+      if (window.matchMedia("(max-width: 720px)").matches) {
+        openCart();
+      }
     }
 
     function updateQty(id, qty) {
@@ -1951,6 +2039,8 @@
         node.textContent = t(node.dataset.i18n);
       });
       $("#languageSelect").value = lang;
+      $("#cartButton").setAttribute("aria-label", t("cart"));
+      $("#cartButton").setAttribute("title", t("cart"));
       renderNav();
       renderCategories();
       renderFilterChips();
