@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Commande confirmee | AphroditeShop{% endblock %}
+
+{% block body_attributes %}data-theme-choice="light" data-resolved-theme="light"{% endblock %}
+
+{% block stylesheets %}
+  <link rel="stylesheet" href="{{ asset('styles/storefront.css') }}">
+{% endblock %}
+
+{% block body %}
+  {% include 'Storefront/partials/_header.html.twig' %}
+
+  <main>
+    <section class="page-head">
+      <span class="eyebrow">Commande recue</span>
+      <h1>Merci, votre commande est confirmee.</h1>
+      <p>Votre numero de commande est <strong>{{ order.orderNumber }}</strong>. Notre equipe va confirmer les informations, preparer le colis, puis lancer la livraison.</p>
+    </section>
+
+    <section class="section" style="padding-top: 12px;">
+      <div class="checkout-layout">
+        <section class="checkout-panel">
+          <h2 class="panel-title">Articles commandes</h2>
+          <div class="panel-body">
+            {% for item in order.items %}
+              <div class="cart-line order-line">
+                <div>
+                  <strong>{{ item.productName }}</strong>
+                  <small>Taille: {{ item.size }}</small>
+                  <small>{{ item.unitPrice|number_format(0, ',', ' ') }} MAD x {{ item.quantity }}</small>
+                </div>
+                <strong>{{ item.lineTotal|number_format(0, ',', ' ') }} MAD</strong>
+              </div>
+            {% endfor %}
+          </div>
+        </section>
+
+        <aside class="checkout-panel">
+          <h2 class="panel-title">Resume</h2>
+          <div class="panel-body">
+            <div class="summary-row"><span>Statut</span><strong>{{ order.statusLabel }}</strong></div>
+            <div class="summary-row"><span>Livraison</span><strong>{{ order.shippingStatusLabel }}</strong></div>
+            <div class="summary-row"><span>Methode</span><strong>{{ order.shippingMethod }}</strong></div>
+            <div class="summary-row"><span>Delai estime</span><strong>{{ order.estimatedDelivery }}</strong></div>
+            <div class="summary-row"><span>Sous-total</span><strong>{{ order.subtotal|number_format(0, ',', ' ') }} MAD</strong></div>
+            <div class="summary-row"><span>Frais livraison</span><strong>{{ order.deliveryFee|number_format(0, ',', ' ') }} MAD</strong></div>
+            <div class="summary-row"><span>Total</span><strong>{{ order.total|number_format(0, ',', ' ') }} MAD</strong></div>
+            {% if order.shippingNotes %}
+              <p>{{ order.shippingNotes }}</p>
+            {% endif %}
+            <a class="button primary" href="{{ path('storefront_home') }}">Continuer mes achats</a>
+            {% if app.user %}
+              <a class="button ghost" href="{{ path('account_home') }}">Voir mon historique</a>
+            {% endif %}
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  {% include 'Storefront/partials/_footer.html.twig' %}
+{% endblock %}

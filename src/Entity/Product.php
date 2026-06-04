@@ -17,6 +17,10 @@ class Product
     #[ORM\JoinColumn(nullable: false)]
     private ?Category $category = null;
 
+    #[ORM\ManyToOne(targetEntity: Subcategory::class, inversedBy: 'products')]
+    #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
+    private ?Subcategory $subcategory = null;
+
     #[ORM\Column(length: 160)]
     private string $nameFr = '';
 
@@ -78,6 +82,8 @@ class Product
     public function getId(): ?int { return $this->id; }
     public function getCategory(): ?Category { return $this->category; }
     public function setCategory(?Category $category): self { $this->category = $category; return $this; }
+    public function getSubcategory(): ?Subcategory { return $this->subcategory; }
+    public function setSubcategory(?Subcategory $subcategory): self { $this->subcategory = $subcategory; return $this; }
     public function getNameFr(): string { return $this->nameFr; }
     public function setNameFr(string $nameFr): self { $this->nameFr = $nameFr; return $this; }
     public function getNameEn(): string { return $this->nameEn; }

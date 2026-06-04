@@ -1,0 +1,33 @@
+<section class="hero">
+  <div>
+    <span class="eyebrow">{{ eyebrow }}</span>
+    <h1>{{ heading }}</h1>
+    <p>{{ intro }}</p>
+    <div class="hero-actions">
+      {% for category in categories|slice(0, 2) %}
+        <a class="button primary" href="{{ path('storefront_category', { slug: category.slug }) }}">{{ category.nameFr }}</a>
+      {% endfor %}
+      <a class="button ghost" href="{{ path('storefront_new_in') }}">Voir les nouveautes</a>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-head">
+    <div>
+      <span class="eyebrow">Boutique</span>
+      <h2>Choisissez votre univers.</h2>
+    </div>
+    <p>Chaque categorie principale a sa propre page, puis chaque sous-categorie a aussi sa page dediee.</p>
+  </div>
+  <div class="category-grid">
+    {% for category in categories %}
+      <a class="category-card" href="{{ path('storefront_category', { slug: category.slug }) }}" style="--card-image: url('{{ category.imageUrl }}')">
+        <strong>{{ category.nameFr }}</strong>
+        <span>{{ category.descriptionFr }}</span>
+      </a>
+    {% else %}
+      <div class="empty">Aucune categorie pour le moment. Lancez le seed ou ajoutez des categories dans l'admin.</div>
+    {% endfor %}
+  </div>
+</section>

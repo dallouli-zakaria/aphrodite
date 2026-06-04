@@ -2,18 +2,18 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Customer;
+use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
-final class CustomerCrudController extends AbstractCrudController
+final class UserCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
-        return Customer::class;
+        return User::class;
     }
 
     public function configureFields(string $pageName): iterable
@@ -21,11 +21,9 @@ final class CustomerCrudController extends AbstractCrudController
         return [
             IdField::new('id')->hideOnForm(),
             TextField::new('fullName', 'Nom complet'),
-            TextField::new('phone', 'Telephone'),
-            EmailField::new('email')->hideOnIndex(),
-            TextField::new('city', 'Ville'),
-            TextField::new('district', 'Quartier'),
-            TextareaField::new('address', 'Adresse')->hideOnIndex(),
+            EmailField::new('email'),
+            ArrayField::new('roles'),
+            TextField::new('googleId', 'Google ID')->hideOnIndex(),
         ];
     }
 }

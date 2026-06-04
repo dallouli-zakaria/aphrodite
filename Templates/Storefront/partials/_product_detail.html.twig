@@ -1,0 +1,67 @@
+<section class="product-detail" id="productDetails" data-product-details>
+  <div class="product-detail-media">
+    <img src="{{ product.imageUrl }}" alt="{{ product.nameFr }}">
+  </div>
+  <div class="product-detail-info">
+    <div class="detail-breadcrumb">
+      <a href="{{ path('storefront_category', { slug: product.category.slug }) }}">{{ product.category.nameFr }}</a>
+      {% if product.subcategory %}
+        / <a href="{{ path('storefront_subcategory', { categorySlug: product.category.slug, subcategorySlug: product.subcategory.slug }) }}">{{ product.subcategory.nameFr }}</a>
+      {% endif %}
+    </div>
+    <span class="eyebrow">{{ product.brand }}</span>
+    <h1>{{ product.nameFr }}</h1>
+    <p>{{ product.descriptionFr }}</p>
+    <div class="price-row">
+      <span class="price">{{ product.price|number_format(0, ',', ' ') }} MAD</span>
+      {% if product.compareAt %}
+        <span class="old-price">{{ product.compareAt|number_format(0, ',', ' ') }} MAD</span>
+      {% endif %}
+    </div>
+    <div class="sizes" data-size-group>
+      {% for size in product.sizes %}
+        <button class="size" type="button" data-size-option="{{ size }}" aria-pressed="false">{{ size }}</button>
+      {% endfor %}
+    </div>
+    <p class="size-note">Choisissez une taille avant d'ajouter au panier.</p>
+    <div class="detail-actions">
+      <button class="button primary" type="button"
+              data-add-product
+              data-id="{{ product.id }}"
+              data-name="{{ product.nameFr }}"
+              data-price="{{ product.price }}"
+              data-image="{{ product.imageUrl }}">
+        Ajouter au panier
+      </button>
+      <button class="button ghost" type="button"
+              data-buy-product
+              data-id="{{ product.id }}"
+              data-name="{{ product.nameFr }}"
+              data-price="{{ product.price }}"
+              data-image="{{ product.imageUrl }}">
+        Acheter maintenant
+      </button>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-head">
+    <div>
+      <span class="eyebrow">Selection</span>
+      <h2>Produits similaires.</h2>
+    </div>
+    <p>Des pieces proches de la meme categorie pour continuer votre selection.</p>
+  </div>
+  <div class="product-grid">
+    {% for similarProduct in similarProducts %}
+      {% include 'Storefront/partials/_product_card.html.twig' with {
+        product: similarProduct,
+        showSizes: false,
+        showActions: false
+      } only %}
+    {% else %}
+      <div class="empty" style="grid-column: 1 / -1;">Aucun produit similaire pour le moment.</div>
+    {% endfor %}
+  </div>
+</section>

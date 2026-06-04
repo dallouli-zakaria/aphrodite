@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription | AphroditeShop{% endblock %}
+
+{% block stylesheets %}
+  {% include 'Auth/partials/auth_styles.html.twig' %}
+{% endblock %}
+
+{% block body %}
+  <main class="auth-page">
+    <a class="back-link" href="{{ path('storefront_home') }}">Retour boutique</a>
+    <section class="auth-card">
+      <span class="eyebrow">Nouveau compte</span>
+      <h1>Creer votre compte.</h1>
+      <p>Inscrivez-vous avec votre email, votre mot de passe et votre nom complet.</p>
+
+      {% for message in errors %}
+        <div class="notice error">{{ message }}</div>
+      {% endfor %}
+
+      <form method="post" class="auth-form">
+        <label>
+          Nom complet
+          <input type="text" name="fullName" autocomplete="name" required>
+        </label>
+        <label>
+          Email
+          <input type="email" name="email" autocomplete="email" required>
+        </label>
+        <label>
+          Mot de passe
+          <input type="password" name="password" autocomplete="new-password" minlength="8" required>
+        </label>
+        <button class="button primary" type="submit">Creer le compte</button>
+      </form>
+
+      <a class="button google" href="{{ path('app_google_login') }}">
+        <span>G</span>
+        Continuer avec Google
+      </a>
+
+      <p class="switch-link">Vous avez deja un compte ? <a href="{{ path('app_login') }}">Se connecter</a></p>
+    </section>
+  </main>
+{% endblock %}

@@ -1,0 +1,11 @@
+.git
+.github
+.env.local
+.env.*.local
+vendor/
+var/
+node_modules/
+public/assets/
+public/bundles/
+assets/vendor/
+config/reference.php

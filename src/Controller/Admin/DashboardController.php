@@ -6,6 +6,7 @@ use App\Entity\Category;
 use App\Entity\Customer;
 use App\Entity\Order;
 use App\Entity\Product;
+use App\Entity\Subcategory;
 use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminDashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -31,11 +32,13 @@ final class DashboardController extends AbstractDashboardController
         return [
             MenuItem::linkToUrl('Retour boutique', 'fa fa-store', '/'),
             MenuItem::section('Catalogue'),
-            MenuItem::linkToCrud('Produits', 'fa fa-shirt', Product::class),
-            MenuItem::linkToCrud('Categories', 'fa fa-tags', Category::class),
+            MenuItem::linkTo(ProductCrudController::class, 'Produits', 'fa fa-shirt'),
+            MenuItem::linkTo(CategoryCrudController::class, 'Categories', 'fa fa-tags'),
+            MenuItem::linkTo(SubcategoryCrudController::class, 'Sous-categories', 'fa fa-list'),
             MenuItem::section('Commandes'),
-            MenuItem::linkToCrud('Commandes', 'fa fa-cart-shopping', Order::class),
-            MenuItem::linkToCrud('Clients', 'fa fa-user', Customer::class),
+            MenuItem::linkTo(OrderCrudController::class, 'Commandes', 'fa fa-cart-shopping'),
+            MenuItem::linkTo(CustomerCrudController::class, 'Clients', 'fa fa-user'),
+            MenuItem::linkTo(UserCrudController::class, 'Comptes', 'fa fa-user-lock'),
         ];
     }
 }

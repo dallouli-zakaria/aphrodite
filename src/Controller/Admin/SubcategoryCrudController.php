@@ -2,45 +2,35 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Product;
+use App\Entity\Subcategory;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
-final class ProductCrudController extends AbstractCrudController
+final class SubcategoryCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
-        return Product::class;
+        return Subcategory::class;
     }
 
     public function configureFields(string $pageName): iterable
     {
         return [
             IdField::new('id')->hideOnForm(),
-            AssociationField::new('category'),
-            AssociationField::new('subcategory', 'Sous-categorie'),
+            AssociationField::new('category', 'Categorie'),
+            TextField::new('slug'),
             TextField::new('nameFr', 'Nom FR'),
-            TextField::new('nameEn', 'Nom EN')->hideOnIndex(),
+            TextField::new('nameEn', 'Nom EN'),
             TextField::new('nameAr', 'Nom AR')->hideOnIndex(),
-            TextField::new('brand'),
-            IntegerField::new('price', 'Prix'),
-            IntegerField::new('compareAt', 'Ancien prix')->hideOnIndex(),
-            TextField::new('badge'),
-            TextField::new('badgeClass')->hideOnIndex(),
-            NumberField::new('rating'),
+            IntegerField::new('position'),
             TextField::new('imageUrl')->hideOnIndex(),
             TextareaField::new('descriptionFr', 'Description FR')->hideOnIndex(),
             TextareaField::new('descriptionEn', 'Description EN')->hideOnIndex(),
             TextareaField::new('descriptionAr', 'Description AR')->hideOnIndex(),
-            ArrayField::new('sizes')->hideOnIndex()->setHelp('Example: S, M, L or 50ml, 100ml'),
-            BooleanField::new('active'),
         ];
     }
 }

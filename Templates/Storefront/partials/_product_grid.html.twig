@@ -1,0 +1,18 @@
+{% set topPadding = topPadding is defined ? topPadding : '52px' %}
+
+<section class="section" style="padding-top: {{ topPadding }};">
+  <div class="section-head">
+    <div>
+      <span class="eyebrow">Catalogue</span>
+      <h2>Produits disponibles.</h2>
+    </div>
+    <p>Ces produits viennent maintenant de MySQL via Doctrine. L'admin pourra les modifier.</p>
+  </div>
+  <div class="product-grid">
+    {% for product in products %}
+      {% include 'Storefront/partials/_product_card.html.twig' with { product: product } only %}
+    {% else %}
+      <div class="empty" style="grid-column: 1 / -1;">Aucun produit dans cette page pour le moment.</div>
+    {% endfor %}
+  </div>
+</section>

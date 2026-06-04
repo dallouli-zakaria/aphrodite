@@ -1,0 +1,44 @@
+<div class="topbar">Livraison offerte des 599 MAD | Retours sous 10 jours | Paiement securise bientot disponible</div>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="{{ path('storefront_home') }}">
+      <span class="brand-mark">AS</span>
+      <span>AphroditeShop</span>
+    </a>
+
+    <nav class="nav" aria-label="Navigation principale">
+      {% for category in categories %}
+        <a href="{{ path('storefront_category', { slug: category.slug }) }}" class="{{ currentCategory and currentCategory.id == category.id ? 'is-active' : '' }}">
+          {{ category.nameFr }}
+        </a>
+      {% endfor %}
+      <a href="{{ path('storefront_new_in') }}" class="{{ page == 'new-in' ? 'is-active' : '' }}">New In</a>
+      <a href="{{ path('storefront_checkout') }}" class="{{ page == 'checkout' ? 'is-active' : '' }}">Checkout</a>
+    </nav>
+
+    <div class="header-tools">
+      <button class="button ghost" type="button" data-theme-toggle>Theme</button>
+      {% if app.user %}
+        <a class="icon-btn account-link" href="{{ path('account_home') }}" aria-label="Mon compte" title="{{ app.user.fullName }}">
+          <span class="account-initial">{{ app.user.fullName|slice(0, 1)|upper }}</span>
+        </a>
+      {% else %}
+        <a class="icon-btn account-link" href="{{ path('app_login') }}" aria-label="Se connecter" title="Se connecter">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2"/>
+            <path d="M4 21c1.5-4 4.2-6 8-6s6.5 2 8 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </a>
+      {% endif %}
+      <button class="icon-btn cart-icon-btn" type="button" data-cart-open aria-label="Ouvrir le panier">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M7 8h14l-2 8H8L6 4H3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="9" cy="20" r="1.5" fill="currentColor"/>
+          <circle cx="18" cy="20" r="1.5" fill="currentColor"/>
+        </svg>
+        <span class="count" data-cart-count>0</span>
+      </button>
+    </div>
+  </div>
+</header>

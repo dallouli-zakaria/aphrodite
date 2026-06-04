@@ -1,0 +1,36 @@
+<section class="section" style="padding-top: 12px;">
+  <div class="checkout-layout">
+    <section class="checkout-panel">
+      <h2 class="panel-title">Articles du panier</h2>
+      <div class="panel-body" data-checkout-cart></div>
+    </section>
+    <aside class="checkout-panel">
+      <h2 class="panel-title">Resume</h2>
+      <div class="panel-body">
+        <div class="summary-row"><span>Sous-total</span><strong data-subtotal>0 MAD</strong></div>
+        <div class="summary-row"><span>Livraison</span><strong data-delivery>0 MAD</strong></div>
+        <div class="summary-row"><span>Total</span><strong data-total>0 MAD</strong></div>
+      </div>
+    </aside>
+    <section class="checkout-panel">
+      <h2 class="panel-title">Informations de livraison</h2>
+      <form class="panel-body form-grid" data-checkout-form>
+        <label>Nom complet<input class="input" name="fullName" required></label>
+        <label>Telephone<input class="input" name="phone" required></label>
+        <label class="wide">Email<input class="input" type="email" name="email" value="{{ app.user ? app.user.email : '' }}"></label>
+        <label>Ville<input class="input" name="city" required></label>
+        <label>Quartier<input class="input" name="district"></label>
+        <label class="wide">Adresse complete<textarea class="input" name="address" required></textarea></label>
+        <button class="button primary wide" type="submit">Valider la commande</button>
+      </form>
+    </section>
+    <aside class="checkout-panel">
+      <h2 class="panel-title">Besoin d'aide ?</h2>
+      <div class="panel-body">
+        <p>Notre equipe peut confirmer les tailles, la disponibilite et les delais avant l'expedition.</p>
+        <a class="button ghost" href="tel:+212600000000">+212 600 000 000</a>
+        <a class="button ghost" href="mailto:hello@aphroditeshop.ma">hello@aphroditeshop.ma</a>
+      </div>
+    </aside>
+  </div>
+</section>

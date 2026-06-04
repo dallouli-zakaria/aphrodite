@@ -24,6 +24,9 @@ class OrderItem
     #[ORM\Column(length: 180)]
     private string $productName = '';
 
+    #[ORM\Column(length: 40)]
+    private string $size = '';
+
     #[ORM\Column]
     private int $quantity = 1;
 
@@ -35,7 +38,7 @@ class OrderItem
 
     public function __toString(): string
     {
-        return sprintf('%s x %d', $this->productName, $this->quantity);
+        return sprintf('%s (%s) x %d', $this->productName, $this->size ?: 'taille ?', $this->quantity);
     }
 
     public function getId(): ?int { return $this->id; }
@@ -45,6 +48,8 @@ class OrderItem
     public function setProduct(?Product $product): self { $this->product = $product; return $this; }
     public function getProductName(): string { return $this->productName; }
     public function setProductName(string $productName): self { $this->productName = $productName; return $this; }
+    public function getSize(): string { return $this->size; }
+    public function setSize(string $size): self { $this->size = trim($size); return $this; }
     public function getQuantity(): int { return $this->quantity; }
     public function setQuantity(int $quantity): self { $this->quantity = $quantity; return $this; }
     public function getUnitPrice(): int { return $this->unitPrice; }

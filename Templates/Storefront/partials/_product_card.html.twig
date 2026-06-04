@@ -1,0 +1,54 @@
+{% set showSizes = showSizes is defined ? showSizes : true %}
+{% set showActions = showActions is defined ? showActions : true %}
+
+<article class="product-card">
+  <a class="product-link" href="{{ path('storefront_product', { id: product.id, slug: product.nameFr|lower|replace({' ': '-', '/': '-'}) }) }}" aria-label="Voir {{ product.nameFr }}">
+    <div class="product-media">
+      <img src="{{ product.imageUrl }}" alt="{{ product.nameFr }}" loading="lazy">
+      <span class="badge {{ product.badgeClass }}">{{ product.badge }}</span>
+    </div>
+    <div class="product-info">
+      <div class="product-meta">
+        <span>{{ product.brand }}</span>
+        <span>{{ product.rating|number_format(1, '.', '') }}/5</span>
+      </div>
+      <h3>{{ product.nameFr }}</h3>
+      <p>{{ product.descriptionFr }}</p>
+      <div class="price-row">
+        <span class="price">{{ product.price|number_format(0, ',', ' ') }} MAD</span>
+        {% if product.compareAt %}
+          <span class="old-price">{{ product.compareAt|number_format(0, ',', ' ') }} MAD</span>
+        {% endif %}
+      </div>
+    </div>
+  </a>
+
+  {% if showSizes %}
+    <div class="sizes product-card-sizes" data-size-group aria-label="Choisir une taille pour {{ product.nameFr }}">
+      {% for size in product.sizes %}
+        <button class="size" type="button" data-size-option="{{ size }}" aria-pressed="false">{{ size }}</button>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  {% if showActions %}
+    <div class="product-actions">
+      <button class="button primary" type="button"
+              data-add-product
+              data-id="{{ product.id }}"
+              data-name="{{ product.nameFr }}"
+              data-price="{{ product.price }}"
+              data-image="{{ product.imageUrl }}">
+        Ajouter
+      </button>
+      <button class="button ghost" type="button"
+              data-buy-product
+              data-id="{{ product.id }}"
+              data-name="{{ product.nameFr }}"
+              data-price="{{ product.price }}"
+              data-image="{{ product.imageUrl }}">
+        Acheter
+      </button>
+    </div>
+  {% endif %}
+</article>

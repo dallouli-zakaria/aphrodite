@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon compte | AphroditeShop{% endblock %}
+
+{% block stylesheets %}
+  {% include 'Auth/partials/auth_styles.html.twig' %}
+{% endblock %}
+
+{% block body %}
+  <main class="auth-page">
+    <a class="back-link" href="{{ path('storefront_home') }}">Retour boutique</a>
+    <section class="auth-card">
+      <span class="eyebrow">Mon compte</span>
+      <h1>Bonjour {{ app.user.fullName }}.</h1>
+      <p>Votre session client est active. Vos commandes sauvegardees apparaissent ici avec leur statut de preparation et livraison.</p>
+
+      <div class="account-box">
+        <span>Email</span>
+        <strong>{{ app.user.email }}</strong>
+      </div>
+
+      <a class="button primary" href="{{ path('storefront_checkout') }}">Aller au checkout</a>
+      <a class="button ghost" href="{{ path('app_logout') }}">Se deconnecter</a>
+
+      <div class="orders-history">
+        <h2>Historique des commandes</h2>
+        {% for order in orders %}
+          <article class="account-box">
+            <span>{{ order.createdAt|date('d/m/Y H:i') }}</span>
+            <strong>{{ order.orderNumber }} - {{ order.total|number_format(0, ',', ' ') }} MAD</strong>
+            <span>Statut: {{ order.statusLabel }}</span>
+            <span>Livraison: {{ order.shippingStatusLabel }} - {{ order.estimatedDelivery }}</span>
+            <a class="button ghost" href="{{ path('checkout_order_completed', { orderNumber: order.orderNumber }) }}">Voir la commande</a>
+          </article>
+        {% else %}
+          <div class="account-box">
+            <span>Aucune commande pour le moment.</span>
+          </div>
+        {% endfor %}
+      </div>
+    </section>
+  </main>
+{% endblock %}

@@ -1,0 +1,12 @@
+<section class="section" style="padding-top: 10px;">
+  <div class="subcategory-grid">
+    {% for subcategory in subcategories %}
+      <a class="subcategory-card {{ currentSubcategory and currentSubcategory.id == subcategory.id ? 'is-active' : '' }}"
+         href="{{ path('storefront_subcategory', { categorySlug: subcategory.category.slug, subcategorySlug: subcategory.slug }) }}"
+         style="--card-image: url('{{ subcategory.imageUrl }}')">
+        <strong>{{ subcategory.nameFr }}</strong>
+        <span>{{ subcategory.descriptionFr }}</span>
+      </a>
+    {% endfor %}
+  </div>
+</section>

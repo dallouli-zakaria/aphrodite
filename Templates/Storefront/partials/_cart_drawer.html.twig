@@ -1,0 +1,17 @@
+<div class="overlay" data-cart-overlay></div>
+<aside class="cart-drawer" data-cart-drawer aria-label="Panier" aria-hidden="true">
+  <div class="drawer-head">
+    <strong>Panier</strong>
+    <button class="icon-btn" type="button" data-cart-close aria-label="Fermer le panier">X</button>
+  </div>
+  <div class="drawer-items" data-drawer-cart></div>
+  <div class="drawer-foot">
+    <div class="drawer-total">
+      <span>Total</span>
+      <strong data-drawer-total>0 MAD</strong>
+    </div>
+    <a class="button primary" href="{{ path('storefront_checkout') }}">Passer au checkout</a>
+  </div>
+</aside>
+
+<div class="toast" data-toast></div>

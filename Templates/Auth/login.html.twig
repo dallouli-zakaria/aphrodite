@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion | AphroditeShop{% endblock %}
+
+{% block stylesheets %}
+  {% include 'Auth/partials/auth_styles.html.twig' %}
+{% endblock %}
+
+{% block body %}
+  <main class="auth-page">
+    <a class="back-link" href="{{ path('storefront_home') }}">Retour boutique</a>
+    <section class="auth-card">
+      <span class="eyebrow">Compte client</span>
+      <h1>Se connecter.</h1>
+      <p>Accedez a votre compte pour retrouver vos informations et preparer votre panier plus rapidement.</p>
+
+      {% for label, messages in app.flashes %}
+        {% for message in messages %}
+          <div class="notice {{ label }}">{{ message }}</div>
+        {% endfor %}
+      {% endfor %}
+
+      {% if error %}
+        <div class="notice error">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+      {% endif %}
+
+      <form method="post" class="auth-form">
+        <label>
+          Email
+          <input type="email" name="_username" value="{{ last_username }}" autocomplete="email" required autofocus>
+        </label>
+        <label>
+          Mot de passe
+          <input type="password" name="_password" autocomplete="current-password" required>
+        </label>
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+        <button class="button primary" type="submit">Se connecter</button>
+      </form>
+
+      <a class="button google" href="{{ path('app_google_login') }}">
+        <span>G</span>
+        Continuer avec Google
+      </a>
+
+      <p class="switch-link">Nouveau client ? <a href="{{ path('app_register') }}">Creer un compte</a></p>
+    </section>
+  </main>
+{% endblock %}
