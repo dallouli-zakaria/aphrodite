@@ -11,6 +11,14 @@ RUN apt-get update \
     && a2enmod rewrite headers \
     && sed -ri 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf \
     && sed -ri 's!/var/www/!${APACHE_DOCUMENT_ROOT}/!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf \
+    && printf '%s\n' \
+        'ServerName localhost' \
+        '<Directory /var/www/html/public>' \
+        '    AllowOverride None' \
+        '    Require all granted' \
+        '    FallbackResource /index.php' \
+        '</Directory>' > /etc/apache2/conf-available/symfony.conf \
+    && a2enconf symfony \
     && rm -rf /var/lib/apt/lists/*
 
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
