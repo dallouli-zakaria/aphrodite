@@ -178,6 +178,10 @@
       gap: 8px;
     }
 
+    .menu-toggle {
+      display: none;
+    }
+
     .cart-icon-btn {
       width: 46px;
       min-width: 46px;
