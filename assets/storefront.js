@@ -76,6 +76,17 @@ function closeCartDrawer() {
   document.querySelector("[data-cart-drawer]")?.setAttribute("aria-hidden", "true");
 }
 
+function closeMobileNav() {
+  document.body.classList.remove("nav-is-open");
+  document.querySelector("[data-mobile-nav-toggle]")?.setAttribute("aria-expanded", "false");
+}
+
+function toggleMobileNav() {
+  const isOpen = !document.body.classList.contains("nav-is-open");
+  document.body.classList.toggle("nav-is-open", isOpen);
+  document.querySelector("[data-mobile-nav-toggle]")?.setAttribute("aria-expanded", isOpen ? "true" : "false");
+}
+
 function productScope(button) {
   return button.closest(".product-card, .product-detail-info");
 }
@@ -231,6 +242,9 @@ function applyTheme(choice) {
   const resolved = choice === "dark" ? "dark" : "light";
   document.body.dataset.resolvedTheme = resolved;
   localStorage.setItem(themeKey, resolved);
+  document.querySelectorAll("[data-theme-label]").forEach((node) => {
+    node.textContent = resolved === "dark" ? "Sombre" : "Clair";
+  });
 }
 
 document.addEventListener("click", async (event) => {
@@ -268,6 +282,21 @@ document.addEventListener("click", async (event) => {
 
   if (event.target.closest("[data-theme-toggle]")) {
     applyTheme(document.body.dataset.resolvedTheme === "dark" ? "light" : "dark");
+  }
+
+  if (event.target.closest("[data-mobile-nav-toggle]")) {
+    toggleMobileNav();
+  }
+
+  if (event.target.closest(".nav a")) {
+    closeMobileNav();
+  }
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") {
+    closeCartDrawer();
+    closeMobileNav();
   }
 });
 
@@ -331,6 +360,7 @@ function initializeStorefront() {
 
   refreshConfig();
   applyTheme(localStorage.getItem(themeKey) || "light");
+  closeMobileNav();
   updateCartCount();
   renderDrawerCart();
   renderCheckout();

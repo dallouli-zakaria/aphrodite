@@ -8,6 +8,7 @@ use App\Entity\Order;
 use App\Entity\Product;
 use App\Entity\Subcategory;
 use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminDashboard;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -25,6 +26,12 @@ final class DashboardController extends AbstractDashboardController
     {
         return Dashboard::new()
             ->setTitle('AphroditeShop');
+    }
+
+    public function configureAssets(): Assets
+    {
+        return Assets::new()
+            ->addCssFile('styles/admin.css');
     }
 
     public function configureMenuItems(): iterable

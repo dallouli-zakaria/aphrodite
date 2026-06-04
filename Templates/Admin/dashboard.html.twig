@@ -3,13 +3,31 @@
 {% block content_title %}AphroditeShop Admin{% endblock %}
 
 {% block main %}
-  <div class="content-panel">
-    <h2>Dashboard en preparation</h2>
-    <p>
-      Cette zone servira a gerer les produits, categories, commandes, clients et paiements quand la base de donnees sera branchee.
-    </p>
-    <p>
-      La prochaine etape sera d'ajouter les entites Doctrine et les ecrans CRUD EasyAdmin.
-    </p>
+  <div class="admin-home">
+    <section class="admin-hero">
+      <h2>Bienvenue dans AphroditeShop.</h2>
+      <p>
+        Gere le catalogue, les categories, les commandes et les comptes depuis un tableau de bord adapte aux grands ecrans comme au mobile.
+      </p>
+    </section>
+
+    <section class="admin-shortcuts" aria-label="Raccourcis admin">
+      <a class="admin-shortcut" href="/admin/product">
+        <strong>Produits</strong>
+        <span>Prix, tailles, images et disponibilite.</span>
+      </a>
+      <a class="admin-shortcut" href="/admin/order">
+        <strong>Commandes</strong>
+        <span>Statut, livraison et suivi client.</span>
+      </a>
+      <a class="admin-shortcut" href="/admin/category">
+        <strong>Categories</strong>
+        <span>Hommes, femmes et pages principales.</span>
+      </a>
+      <a class="admin-shortcut" href="/admin/user">
+        <strong>Comptes</strong>
+        <span>Clients connectes et permissions.</span>
+      </a>
+    </section>
   </div>
 {% endblock %}

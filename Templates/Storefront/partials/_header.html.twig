@@ -7,7 +7,14 @@
       <span>AphroditeShop</span>
     </a>
 
-    <nav class="nav" aria-label="Navigation principale">
+    <button class="icon-btn menu-toggle" type="button" data-mobile-nav-toggle aria-expanded="false" aria-controls="primaryNav">
+      <span></span>
+      <span></span>
+      <span></span>
+      <strong>Menu</strong>
+    </button>
+
+    <nav class="nav" id="primaryNav" aria-label="Navigation principale">
       {% for category in categories %}
         <a href="{{ path('storefront_category', { slug: category.slug }) }}" class="{{ currentCategory and currentCategory.id == category.id ? 'is-active' : '' }}">
           {{ category.nameFr }}
@@ -18,7 +25,9 @@
     </nav>
 
     <div class="header-tools">
-      <button class="button ghost" type="button" data-theme-toggle>Theme</button>
+      <button class="button ghost theme-toggle" type="button" data-theme-toggle aria-label="Changer le theme">
+        <span data-theme-label>Clair</span>
+      </button>
       {% if app.user %}
         <a class="icon-btn account-link" href="{{ path('account_home') }}" aria-label="Mon compte" title="{{ app.user.fullName }}">
           <span class="account-initial">{{ app.user.fullName|slice(0, 1)|upper }}</span>
