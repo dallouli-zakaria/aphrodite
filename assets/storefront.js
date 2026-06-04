@@ -1,5 +1,4 @@
 let cartKey = "aphroditeshop-cart-v3";
-let themeKey = "aphroditeshop-theme-v3";
 let checkoutUrl = "/checkout";
 let cartAddUrl = "/cart/add";
 let cartMergeUrl = "/cart/merge";
@@ -28,7 +27,6 @@ function refreshConfig() {
   const config = JSON.parse(configNode?.textContent || "{}");
 
   cartKey = config.cartKey || cartKey;
-  themeKey = config.themeKey || themeKey;
   checkoutUrl = config.checkoutUrl || checkoutUrl;
   cartAddUrl = config.cartAddUrl || cartAddUrl;
   cartMergeUrl = config.cartMergeUrl || cartMergeUrl;
@@ -78,13 +76,12 @@ function closeCartDrawer() {
 
 function closeMobileNav() {
   document.body.classList.remove("nav-is-open");
-  document.querySelector("[data-mobile-nav-toggle]")?.setAttribute("aria-expanded", "false");
+  document.querySelector("[data-mobile-nav-open]")?.setAttribute("aria-expanded", "false");
 }
 
-function toggleMobileNav() {
-  const isOpen = !document.body.classList.contains("nav-is-open");
-  document.body.classList.toggle("nav-is-open", isOpen);
-  document.querySelector("[data-mobile-nav-toggle]")?.setAttribute("aria-expanded", isOpen ? "true" : "false");
+function openMobileNav() {
+  document.body.classList.add("nav-is-open");
+  document.querySelector("[data-mobile-nav-open]")?.setAttribute("aria-expanded", "true");
 }
 
 function productScope(button) {
@@ -238,15 +235,6 @@ function renderCheckout() {
   document.querySelector("[data-total]")?.replaceChildren(money(totals.total));
 }
 
-function applyTheme(choice) {
-  const resolved = choice === "dark" ? "dark" : "light";
-  document.body.dataset.resolvedTheme = resolved;
-  localStorage.setItem(themeKey, resolved);
-  document.querySelectorAll("[data-theme-label]").forEach((node) => {
-    node.textContent = resolved === "dark" ? "Sombre" : "Clair";
-  });
-}
-
 document.addEventListener("click", async (event) => {
   const sizeButton = event.target.closest("[data-size-option]");
   if (sizeButton) {
@@ -280,12 +268,12 @@ document.addEventListener("click", async (event) => {
     closeCartDrawer();
   }
 
-  if (event.target.closest("[data-theme-toggle]")) {
-    applyTheme(document.body.dataset.resolvedTheme === "dark" ? "light" : "dark");
+  if (event.target.closest("[data-mobile-nav-open]")) {
+    openMobileNav();
   }
 
-  if (event.target.closest("[data-mobile-nav-toggle]")) {
-    toggleMobileNav();
+  if (event.target.closest("[data-mobile-nav-close]") || event.target.closest("[data-mobile-nav-overlay]")) {
+    closeMobileNav();
   }
 
   if (event.target.closest(".nav a")) {
@@ -359,7 +347,6 @@ function initializeStorefront() {
   initializedConfigNode = configNode;
 
   refreshConfig();
-  applyTheme(localStorage.getItem(themeKey) || "light");
   closeMobileNav();
   updateCartCount();
   renderDrawerCart();

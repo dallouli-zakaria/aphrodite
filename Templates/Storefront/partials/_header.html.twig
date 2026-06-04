@@ -2,19 +2,25 @@
 
 <header class="site-header">
   <div class="header-inner">
+    <button class="icon-btn menu-toggle" type="button" data-mobile-nav-open aria-expanded="false" aria-controls="primaryNav" aria-label="Ouvrir le menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
     <a class="brand" href="{{ path('storefront_home') }}">
       <span class="brand-mark">AS</span>
       <span>AphroditeShop</span>
     </a>
 
-    <button class="icon-btn menu-toggle" type="button" data-mobile-nav-toggle aria-expanded="false" aria-controls="primaryNav">
-      <span></span>
-      <span></span>
-      <span></span>
-      <strong>Menu</strong>
-    </button>
-
     <nav class="nav" id="primaryNav" aria-label="Navigation principale">
+      <div class="mobile-nav-head">
+        <span class="brand">
+          <span class="brand-mark">AS</span>
+          <span>Menu</span>
+        </span>
+        <button class="icon-btn" type="button" data-mobile-nav-close aria-label="Fermer le menu">X</button>
+      </div>
       {% for category in categories %}
         <a href="{{ path('storefront_category', { slug: category.slug }) }}" class="{{ currentCategory and currentCategory.id == category.id ? 'is-active' : '' }}">
           {{ category.nameFr }}
@@ -25,9 +31,6 @@
     </nav>
 
     <div class="header-tools">
-      <button class="button ghost theme-toggle" type="button" data-theme-toggle aria-label="Changer le theme">
-        <span data-theme-label>Clair</span>
-      </button>
       {% if app.user %}
         <a class="icon-btn account-link" href="{{ path('account_home') }}" aria-label="Mon compte" title="{{ app.user.fullName }}">
           <span class="account-initial">{{ app.user.fullName|slice(0, 1)|upper }}</span>
@@ -51,3 +54,5 @@
     </div>
   </div>
 </header>
+
+<div class="nav-overlay" data-mobile-nav-overlay></div>

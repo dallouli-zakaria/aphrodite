@@ -118,26 +118,6 @@ body.ea .ts-control {
   color: var(--aphro-muted);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --aphro-ink: #f7f1e8;
-    --aphro-paper: #0f1115;
-    --aphro-panel: #171a20;
-    --aphro-line: rgba(255, 255, 255, 0.12);
-    --aphro-muted: #b8b0a6;
-    --aphro-shadow: 0 18px 48px rgba(0, 0, 0, 0.28);
-  }
-
-  body.ea .table,
-  body.ea .form-control,
-  body.ea .form-select,
-  body.ea .ts-control,
-  body.ea .dropdown-menu {
-    color: var(--aphro-ink);
-    background-color: var(--aphro-panel);
-  }
-}
-
 @media (max-width: 992px) {
   body.ea .content-wrapper {
     padding-inline: 12px;

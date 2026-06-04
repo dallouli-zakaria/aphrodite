@@ -2,8 +2,6 @@
 
 {% block title %}{{ title }} | AphroditeShop{% endblock %}
 
-{% block body_attributes %}data-theme-choice="light" data-resolved-theme="light"{% endblock %}
-
 {% block stylesheets %}
   <link rel="stylesheet" href="{{ asset('styles/storefront.css') }}">
 {% endblock %}
@@ -17,7 +15,6 @@
   <script type="application/json" data-storefront-config>
     {{ {
       cartKey: 'aphroditeshop-cart-v3',
-      themeKey: 'aphroditeshop-theme-v3',
       checkoutUrl: path('storefront_checkout'),
       cartAddUrl: path('cart_add'),
       cartMergeUrl: path('cart_merge'),
