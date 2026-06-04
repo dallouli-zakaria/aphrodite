@@ -1,72 +1,197 @@
-:root {
+:root,
+body.ea,
+body.ea.ea-dark-scheme,
+[data-bs-theme="dark"] {
+  color-scheme: light !important;
   --aphro-brand: #c6842f;
   --aphro-brand-strong: #8f561b;
   --aphro-ink: #171717;
   --aphro-paper: #fbf7ef;
   --aphro-panel: #ffffff;
+  --aphro-panel-soft: #f6efe4;
   --aphro-line: rgba(23, 23, 23, 0.12);
   --aphro-muted: #69645e;
+  --aphro-sidebar: #151515;
   --aphro-shadow: 0 18px 48px rgba(30, 24, 18, 0.1);
+
+  --body-bg: var(--aphro-paper) !important;
+  --body-color: var(--aphro-ink) !important;
+  --body-max-width: 100% !important;
+  --text-color: var(--aphro-ink) !important;
+  --text-color-dark: var(--aphro-ink) !important;
+  --text-color-light: var(--aphro-muted) !important;
+  --content-bg: var(--aphro-paper) !important;
+  --sidebar-bg: var(--aphro-sidebar) !important;
+  --sidebar-border-color: var(--aphro-sidebar) !important;
+  --sidebar-logo-color: #fbf7ef !important;
+  --sidebar-menu-color: #fbf7ef !important;
+  --sidebar-menu-icon-color: #d8cbbc !important;
+  --sidebar-menu-header-color: #fbf7ef !important;
+  --sidebar-menu-active-item-bg: #f0dfc8 !important;
+  --sidebar-menu-active-item-color: #151515 !important;
+  --table-cell-color: var(--aphro-ink) !important;
+  --table-thead-color: var(--aphro-ink) !important;
+  --table-thead-sorted-color: var(--aphro-ink) !important;
+  --table-thead-marker-color: var(--aphro-muted) !important;
+  --table-cell-border-color: var(--aphro-line) !important;
+  --table-hover-cell-bg: #f8f1e7 !important;
+  --table-selected-cell-bg: #f2e2cb !important;
+  --datagrid-noresults-placeholder-bg: #f3eadc !important;
+  --datagrid-hidden-results-gradient-bg: #fbf7ef !important;
+  --form-control-bg: #ffffff !important;
+  --form-input-border-color: var(--aphro-line) !important;
+  --form-input-hover-border-color: var(--aphro-brand) !important;
+  --form-input-shadow: none !important;
+  --form-input-hover-shadow: 0 0 0 4px rgba(198, 132, 47, 0.14) !important;
+  --dropdown-bg: #ffffff !important;
+  --dropdown-color: var(--aphro-ink) !important;
+  --dropdown-border-color: var(--aphro-line) !important;
+  --button-primary-bg: var(--aphro-ink) !important;
+  --button-primary-color: #fbf7ef !important;
+  --color-primary: var(--aphro-brand-strong) !important;
+  --link-color: #8f561b !important;
 }
 
 body.ea {
   background:
     radial-gradient(circle at top left, rgba(198, 132, 47, 0.14), transparent 28rem),
-    var(--aphro-paper);
-  color: var(--aphro-ink);
+    var(--aphro-paper) !important;
+  color: var(--aphro-ink) !important;
 }
 
-body.ea .main-content,
 body.ea .content-wrapper,
+body.ea .content,
+body.ea .main-content {
+  background: transparent !important;
+  color: var(--aphro-ink) !important;
+}
+
 body.ea .content-panel,
 body.ea .datagrid,
 body.ea .form-widget,
-body.ea .field-form_panel {
-  border-color: var(--aphro-line);
-  background: color-mix(in srgb, var(--aphro-panel) 94%, transparent);
+body.ea .field-form_panel,
+body.ea .ea-index .content-panel-body,
+body.ea .list-pagination {
+  border-color: var(--aphro-line) !important;
+  background: rgba(255, 255, 255, 0.96) !important;
+  color: var(--aphro-ink) !important;
   box-shadow: var(--aphro-shadow);
 }
 
 body.ea .sidebar {
-  background: #151515;
+  background: var(--aphro-sidebar) !important;
+  color: #fbf7ef !important;
 }
 
 body.ea .sidebar .main-header,
 body.ea .sidebar .main-header a,
 body.ea .menu .menu-item-label,
-body.ea .menu .menu-icon {
-  color: #fbf7ef;
+body.ea .menu .menu-icon,
+body.ea .menu .menu-header {
+  color: #fbf7ef !important;
 }
 
 body.ea .menu .menu-item.active,
 body.ea .menu .menu-item:hover {
-  background: rgba(198, 132, 47, 0.18);
+  background: rgba(240, 223, 200, 0.18) !important;
 }
 
-body.ea .content-top {
-  border-bottom-color: var(--aphro-line);
+body.ea .menu .menu-item.active .menu-item-label,
+body.ea .menu .menu-item.active .menu-icon {
+  color: #151515 !important;
+}
+
+body.ea .content-top,
+body.ea .responsive-header {
+  border-bottom-color: var(--aphro-line) !important;
+  background: rgba(255, 255, 255, 0.94) !important;
+  color: var(--aphro-ink) !important;
 }
 
 body.ea .page-title,
 body.ea .content-header-title h1,
 body.ea h1,
-body.ea h2 {
-  color: var(--aphro-ink);
+body.ea h2,
+body.ea h3 {
+  color: var(--aphro-ink) !important;
 }
 
-body.ea .btn-primary {
-  border-color: var(--aphro-ink);
-  background: var(--aphro-ink);
+body.ea table,
+body.ea .table,
+body.ea table.datagrid,
+body.ea .table.datagrid,
+body.ea .datagrid thead,
+body.ea .datagrid tbody,
+body.ea .datagrid tr,
+body.ea .datagrid th,
+body.ea .datagrid td {
+  background-color: #ffffff !important;
+  color: var(--aphro-ink) !important;
+  border-color: var(--aphro-line) !important;
+}
+
+body.ea .datagrid tbody tr:hover,
+body.ea .datagrid tbody tr:hover td {
+  background-color: #f8f1e7 !important;
+}
+
+body.ea .datagrid a {
+  color: #8f561b !important;
+}
+
+body.ea .field-boolean .form-switch .form-check-input {
+  background-color: #d8cbbc !important;
+  border-color: #d8cbbc !important;
+}
+
+body.ea .field-boolean .form-switch .form-check-input:checked {
+  background-color: var(--aphro-brand) !important;
+  border-color: var(--aphro-brand) !important;
+}
+
+body.ea .btn-primary,
+body.ea .action-new,
+body.ea .action-saveAndReturn,
+body.ea .action-saveAndContinue {
+  border-color: var(--aphro-ink) !important;
+  background: var(--aphro-ink) !important;
+  color: #fbf7ef !important;
 }
 
 body.ea .btn-secondary,
 body.ea .btn-light,
 body.ea .form-control,
 body.ea .form-select,
-body.ea .ts-control {
-  border-color: var(--aphro-line);
-  background-color: var(--aphro-panel);
-  color: var(--aphro-ink);
+body.ea .ts-control,
+body.ea input,
+body.ea textarea,
+body.ea select {
+  border-color: var(--aphro-line) !important;
+  background-color: #ffffff !important;
+  color: var(--aphro-ink) !important;
+}
+
+body.ea .dropdown-menu,
+body.ea .dropdown-item {
+  background-color: #ffffff !important;
+  color: var(--aphro-ink) !important;
+}
+
+body.ea .dropdown-item:hover {
+  background-color: #f8f1e7 !important;
+}
+
+body.ea .search-wrapper,
+body.ea .global-search,
+body.ea .global-search input {
+  background: #ffffff !important;
+  color: var(--aphro-ink) !important;
+}
+
+body.ea .user-menu-wrapper a,
+body.ea .settings-button,
+body.ea .navbar-custom-menu i {
+  color: var(--aphro-ink) !important;
 }
 
 .admin-home {
