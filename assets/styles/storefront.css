@@ -12,7 +12,7 @@
       --danger: #b13f36;
       --field: #ffffff;
       --field-focus: rgba(198, 132, 47, 0.18);
-      --overlay: rgba(11, 9, 7, 0.42);
+      --overlay: transparent;
       --shadow: 0 18px 50px rgba(30, 24, 18, 0.1);
       --ease: 0.24s ease;
     }
